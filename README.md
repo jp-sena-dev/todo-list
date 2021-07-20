@@ -1,3 +1,3 @@
 #To-do list
 
--1 Primeiro projeto solo
+1. Primeiro projeto solo
