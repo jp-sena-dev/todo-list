@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+/* coluna tarefa ---------------------------- */
+ul li p{
+  font-size: 1.6rem;
+}
