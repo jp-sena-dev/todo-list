@@ -7,7 +7,67 @@ html {
   font-size: 62.5%;
 }
 
-/* coluna tarefa ---------------------------- */
-ul li p{
+main {
+  margin: auto;
+  margin-top: 1rem;
+  width: min-content;
+}
+
+/* input ---------------------------- */
+div.digitador {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  height: 3.5rem;
+  width: 25rem;
+  font-size: 2rem;
+  padding-left: 0.5rem;
+}
+
+/* todas tarefas ----------------------- */
+ul {
+  position: relative;
+}
+
+/* tarefa ---------------------------- */
+ul li.tarefa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  transition: 0.5s;
+
+  margin-top: 1rem;
+  padding-right: 1rem;
+  padding-left: 1.5rem;
+
+  min-width: 50rem;
+  height: 5.5em;
+
+  border-bottom: 1px solid blue;
+  box-shadow: 4px 5px 12px rgba(37, 4, 4, 0.25);
+}
+
+i.icon-edit,
+i.icon-delete {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+i.icon-edit {
+  margin-right: 1rem;
+}
+
+/* tarefa conteúdo ---------------------------- */
+ul.tarefas li.tarefa p {
   font-size: 1.6rem;
+}
+
+/* animação tarefa deletada */
+li.deletado {
+  position: relative;
+  opacity: 0;
+  width: 0;
 }
