@@ -27,9 +27,7 @@ input {
 }
 
 /* todas tarefas ----------------------- */
-ul {
-  position: relative;
-}
+
 
 /* tarefa ---------------------------- */
 ul li.tarefa {
@@ -37,7 +35,7 @@ ul li.tarefa {
   align-items: center;
   justify-content: space-between;
 
-  transition: 0.5s;
+  transition: 0.3s;
 
   margin-top: 1rem;
   padding-right: 1rem;
@@ -51,7 +49,8 @@ ul li.tarefa {
 }
 
 i.icon-edit,
-i.icon-delete {
+i.icon-delete,
+i.icon-in-alt {
   font-size: 2rem;
   cursor: pointer;
 }
@@ -67,7 +66,6 @@ ul.tarefas li.tarefa p {
 
 /* animação tarefa deletada */
 li.deletado {
-  position: relative;
+  height: 3rem;
   opacity: 0;
-  width: 0;
 }
