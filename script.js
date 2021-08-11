@@ -2,7 +2,10 @@
 const mostrandoElementosSalvo = () => {
   for (let index = 0; index <= localStorage.length; index += 1) {
     if (localStorage[index] != undefined){
-      criadorTarefa(localStorage[index]);
+      let informacoes = localStorage[index];
+      criadorTarefa(informacoes);
+    } else if (localStorage[`${index}concluido`]) {
+      criadorTarefa(localStorage[`${index}concluido`], "S");
     };
   };
 };
@@ -10,12 +13,18 @@ const mostrandoElementosSalvo = () => {
 /* salvando informações no localStorage */
 const salvarInformacao = () => {
   localStorage.clear();
-  const tarefas = document.querySelectorAll(".conteudoTarefa");
+  const tarefas = document.querySelectorAll(".tarefa");
   // localStorage.setItem('tarefas', JSON.stringify([1, 2, 3, 4]));
   tarefas.forEach((tarefa, index) => {
-    localStorage.setItem(index, tarefa.innerHTML);
+    const conteudo = tarefa.firstChild;
+    if (tarefa.classList.length > 1) {
+      localStorage.setItem(`${index}concluido`, conteudo.innerHTML);
+    } else {
+      localStorage.setItem(index, conteudo.innerHTML);
+    }
   });
 };
+
 
 /* quando apertar a tecla enter */
 const verificadorInput = () => {
@@ -50,7 +59,6 @@ const clickEditar = (tarefa, icone) => {
     const quantidadeEditor = document.querySelectorAll(".editando");
     if (quantidadeEditor.length != 1) {
       const input = document.createElement("input");
-      const iconeEnter = document.createElement("i");
       const conteudoTarefa = tarefa.children[0];
 
       input.classList.add("editando");
@@ -81,30 +89,56 @@ const opcoesEditar = (tarefa, input) => {
   });
 };
 
+const concluido = (checkbox, tarefa, taConcluido) => {
+  if (taConcluido == "concluido") {
+    checkbox.checked = true;
+    tarefa.classList.add("concluido");
+  };
+  checkbox.addEventListener("click", () => {
+    if (checkbox.checked == true) {
+      tarefa.classList.add("concluido");
+      console.log(tarefa);
+    } else {
+      tarefa.classList.remove("concluido");
+      console.log(tarefa);
+    };
+    salvarInformacao();
+  });
+};
+
 /* mostrar tarefa na tela com todos os elementos */
-const criadorTarefa = (conteudo) => {
+const criadorTarefa = (...conteudo) => {
   const tarefas = document.querySelector(".tarefas");
   const tarefa = document.createElement("li");
+  const caixaVerificador = document.createElement("input");
   const conteudoTarefa = document.createElement("p");
   const icones = document.createElement("div");
   const iconeLixiera = document.createElement("i");
   const iconeEditar = document.createElement("i"); 
-
+  
   tarefa.classList.add("tarefa");
   conteudoTarefa.classList.add("conteudoTarefa");
   iconeLixiera.classList.add("icon-delete");
   iconeEditar.classList.add("icon-edit");
-
-  conteudoTarefa.innerHTML = conteudo;
-
+  
+  conteudoTarefa.innerHTML = conteudo[0];
+  
   clickDeletar(tarefa, iconeLixiera);
   clickEditar(tarefa, iconeEditar);
-
+  
   tarefas.appendChild(tarefa);
   tarefa.appendChild(conteudoTarefa);
   tarefa.appendChild(icones);
   icones.appendChild(iconeEditar);
   icones.appendChild(iconeLixiera);
+
+  //checkbox 
+  tarefa.appendChild(caixaVerificador);
+
+  caixaVerificador.setAttribute("type", "checkbox");
+  caixaVerificador.classList.add('marcador');
+  concluido(caixaVerificador, tarefa, conteudo.length > 1? "concluido":"n");
+  
 };
 
 window.onload = () => {

@@ -26,9 +26,6 @@ input {
   padding-left: 0.5rem;
 }
 
-/* todas tarefas ----------------------- */
-
-
 /* tarefa ---------------------------- */
 ul li.tarefa {
   display: flex;
@@ -37,11 +34,13 @@ ul li.tarefa {
 
   transition: 0.3s;
 
+  position: relative;
+
   margin-top: 1rem;
   padding-right: 1rem;
   padding-left: 1.5rem;
 
-  min-width: 50rem;
+  width: min(80vw, 50rem);
   height: 5.5em;
 
   border-bottom: 1px solid blue;
@@ -68,4 +67,10 @@ ul.tarefas li.tarefa p {
 li.deletado {
   height: 3rem;
   opacity: 0;
+}
+
+.marcador {
+  width: 2rem;
+  position: absolute;
+  left: -3rem;
 }
