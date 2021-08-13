@@ -67,10 +67,10 @@ const excluir = () => {
   botaoCancelar.addEventListener("click", () => {
     const tarefasConcluido = document.querySelectorAll(".concluido");
     const telaDeletar = document.querySelector("#deletarConcluidoTela");
+    telaDeletar.classList.remove("aparente");
     tarefasConcluido.forEach((tarefa) => {
       tarefa.remove();
     });
-    telaDeletar.classList.remove("aparente");
     salvarInformacao();
   });
 };
