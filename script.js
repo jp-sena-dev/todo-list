@@ -1,3 +1,4 @@
+const quantidadeCaracteres = 147;
 /* mostrando elementos do localStorage */
 const mostrandoElementosSalvo = () => {
   for (let index = 0; index <= localStorage.length; index += 1) {
@@ -5,7 +6,7 @@ const mostrandoElementosSalvo = () => {
       let informacoes = localStorage[index];
       criadorTarefa(informacoes);
     } else if (localStorage[`${index}concluido`]) {
-      criadorTarefa(localStorage[`${index}concluido`], "S");
+      criadorTarefa(localStorage[`${index}concluido`], "s");
     };
   };
 };
@@ -27,18 +28,60 @@ const salvarInformacao = () => {
 
 
 /* quando apertar a tecla enter */
-const verificadorInput = () => {
+const inputPricipal = () => {
   const tarefa = document.querySelector("#tarefaConteudo");
   tarefa.addEventListener("keyup", (tecla) => {
     if (tecla.key === 'Enter')  {
-      if (tarefa.value.length != 0) {
+      if (tarefa.value.length > quantidadeCaracteres || tarefa.value.length == 0) {
+        alerta();
+      } else{
         criadorTarefa(tarefa.value);
         salvarInformacao();
         tarefa.value = "";
-      } else {
-        alert('Digite uma tarefa');
       };
     };
+  });
+};
+
+/* alerta do input */
+const alerta = () => {
+  const alerta = document.querySelector("#alerta");
+
+  alerta.classList.add("aparente");
+  setTimeout(() => {
+    alerta.classList.remove("aparente");
+  }, 2500);
+};
+
+/*deletando tarefas concluidas */
+const cancelarExcluir = () => {
+  const botaoCancelar = document.querySelector("#deletarConcluidoCancelar");
+  botaoCancelar.addEventListener("click", () => {
+    const telaDeletar = document.querySelector("#deletarConcluidoTela");
+    telaDeletar.classList.remove("aparente");
+  });
+};
+
+const excluir = () => {
+  const botaoCancelar = document.querySelector("#deletarConcluidoConfirmar");
+  botaoCancelar.addEventListener("click", () => {
+    const tarefasConcluido = document.querySelectorAll(".concluido");
+    const telaDeletar = document.querySelector("#deletarConcluidoTela");
+    tarefasConcluido.forEach((tarefa) => {
+      tarefa.remove();
+    });
+    telaDeletar.classList.remove("aparente");
+    salvarInformacao();
+  });
+};
+
+const deletarConcluidos = () => {
+  const iconeDeletar = document.querySelector(".deletarConcluido");
+  iconeDeletar.addEventListener("click", () => {
+    const telaDeletar = document.querySelector("#deletarConcluidoTela");
+    telaDeletar.classList.add("aparente");
+    cancelarExcluir();
+    excluir();
   });
 };
 
@@ -74,40 +117,47 @@ const clickEditar = (tarefa, icone) => {
 };
 
 const opcoesEditar = (tarefa, input) => {
-  const conteudo = document.createElement("p");
+  let conteudo = document.createElement("p");
   input.addEventListener("blur", () => {
-    conteudo.innerHTML = input.value;
-    tarefa.insertBefore(tarefa.appendChild(conteudo), input);
-    input.remove();
-    conteudo.classList.add("conteudoTarefa");
-    salvarInformacao();
+    if (input.value.length > quantidadeCaracteres || input.value.length <= 0) {
+      alerta();
+      input.focus();
+    } else {
+      conteudo.innerHTML = input.value;
+      tarefa.insertBefore(tarefa.appendChild(conteudo), input);
+      input.remove();
+      conteudo.classList.add("conteudoTarefa");
+      salvarInformacao();
+    };
   });
   input.addEventListener("keyup", (tecla) => {
     if (tecla.key === 'Enter') {
-      input.blur();
+      if (input.value.length > quantidadeCaracteres) {
+        alerta();
+      }else {
+        input.blur();
+      };
     };
   });
 };
 
-const concluido = (checkbox, tarefa, taConcluido) => {
-  if (taConcluido == "concluido") {
+const tarefaConcluido = (checkbox, tarefa, concluido) => {
+  if (concluido == "s") {
     checkbox.checked = true;
     tarefa.classList.add("concluido");
   };
   checkbox.addEventListener("click", () => {
     if (checkbox.checked == true) {
       tarefa.classList.add("concluido");
-      console.log(tarefa);
     } else {
       tarefa.classList.remove("concluido");
-      console.log(tarefa);
     };
     salvarInformacao();
   });
 };
 
 /* mostrar tarefa na tela com todos os elementos */
-const criadorTarefa = (...conteudo) => {
+const criadorTarefa = (conteudo, concluido = "n") => {
   const tarefas = document.querySelector(".tarefas");
   const tarefa = document.createElement("li");
   const caixaVerificador = document.createElement("input");
@@ -121,7 +171,7 @@ const criadorTarefa = (...conteudo) => {
   iconeLixiera.classList.add("icon-delete");
   iconeEditar.classList.add("icon-edit");
   
-  conteudoTarefa.innerHTML = conteudo[0];
+  conteudoTarefa.innerHTML = conteudo;
   
   clickDeletar(tarefa, iconeLixiera);
   clickEditar(tarefa, iconeEditar);
@@ -137,11 +187,12 @@ const criadorTarefa = (...conteudo) => {
 
   caixaVerificador.setAttribute("type", "checkbox");
   caixaVerificador.classList.add('marcador');
-  concluido(caixaVerificador, tarefa, conteudo.length > 1? "concluido":"n");
+  tarefaConcluido(caixaVerificador, tarefa, concluido);
   
 };
 
 window.onload = () => {
   mostrandoElementosSalvo();
-  verificadorInput();
+  inputPricipal();
+  deletarConcluidos();
 };

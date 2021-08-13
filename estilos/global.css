@@ -7,16 +7,42 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 main {
   margin: auto;
   margin-top: 1rem;
   width: min-content;
 }
 
+section {
+  position: relative;
+}
+
+.botao {
+  padding: 1rem;
+
+  cursor: pointer;
+
+  border-radius: 0.5rem;
+  box-shadow: 4px 5px 10px 0px #0000006b;;
+}
+
+.botao.vermelho {
+  background-color: #E83F5B;
+}
+
+.botao.azul {
+  background-color: #3485FF;
+}
+
 /* input ---------------------------- */
 div.digitador {
   display: flex;
   justify-content: center;
+  margin: 1rem;
 }
 
 input {
@@ -24,6 +50,69 @@ input {
   width: 25rem;
   font-size: 2rem;
   padding-left: 0.5rem;
+}
+
+/* deletar concluidos */
+i.deletarConcluido {
+  position: absolute;
+  top: 0.5rem;
+  left: -3.2rem;
+}
+
+i.deletarConcluido.icon-delete {
+  font-size: 2.5rem;
+}
+
+div#deletarConcluidoTela {
+  visibility: hidden;
+  opacity: 0;
+  display: none;
+}
+
+#deletarConcluidoTela.aparente {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  height: 100vh;
+  width: 100vw;
+
+  z-index: 10;
+
+  background-color: #00000052;
+}
+
+#deletarConcluidoTela.aparente > div {
+  margin: 3em auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 35rem;
+  height: 35rem;
+
+
+  border-radius: 10%;
+
+  font-size: 2.5rem;
+  text-align: center;
+
+  background-color: white;
+  padding: 0 2.5rem;
+}
+
+#deletarConcluidoTela.aparente > div > div {
+  width: 100%;
+  display: flex;
+  margin-top: 5rem;
+  justify-content: space-around;
 }
 
 /* tarefa ---------------------------- */
@@ -36,41 +125,100 @@ ul li.tarefa {
 
   position: relative;
 
-  margin-top: 1rem;
-  padding-right: 1rem;
-  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem 1rem 1rem;
 
   width: min(80vw, 50rem);
   height: 5.5em;
 
-  border-bottom: 1px solid blue;
+  border-bottom: 1px solid red;
   box-shadow: 4px 5px 12px rgba(37, 4, 4, 0.25);
 }
+
+ul li.tarefa.concluido {
+  border-bottom: 1px solid blue;
+}
+
 
 i.icon-edit,
 i.icon-delete,
 i.icon-in-alt {
   font-size: 2rem;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 i.icon-edit {
   margin-right: 1rem;
+  color: rgb(4, 4, 99);
+}
+
+i.icon-edit:hover {
+  color: rgb(118, 118, 224);
+}
+
+i.icon-delete:hover {
+  color: red;
+}
+
+/* alerta */
+div.alerta.aparente {
+  visibility: visible;
+  opacity: 1;
+  
+  position: fixed;
+
+  left: 0.1rem;
+}
+
+div.alerta {
+  transition: 0.1s;
+  padding: 1rem;
+
+  background-color: aqua;
+  
+  visibility: hidden;
+  opacity: 0;
+  
+  position: fixed;
+  left: -10rem;
+  z-index: 10;
+}
+
+div.alerta {
+  font-size: 1.6rem;
 }
 
 /* tarefa conteúdo ---------------------------- */
 ul.tarefas li.tarefa p {
+  word-break: break-word;
+  margin-right: 0.5rem;
+
   font-size: 1.6rem;
+  line-height: 2rem;
 }
 
 /* animação tarefa deletada */
-li.deletado {
-  height: 3rem;
+ul li.deletado {
+  height: 4rem;
+  width: 0;
   opacity: 0;
+}
+
+ul li.deletado p {
+  width: min-content;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .marcador {
   width: 2rem;
   position: absolute;
   left: -3rem;
+}
+
+/* input editar */
+input.editando {
+  width: 100%;
+  z-index: 2;
 }
