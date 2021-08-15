@@ -9,23 +9,24 @@
     <link rel="stylesheet" href="/icones/icomoon/style.css">
 </head>
 <body>
+  <header>
+    <h1>lista de tarefas</h1>
+  </header>
   <main>
-    <div class="alerta" id="alerta">
-      <p>!alerta!</p>
-    </div>
-    <div id="deletarConcluidoTela" class="">
+    <section class="alerta" id="alerta"></section>
+    <section id="deletarConcluidoTela" class="">
       <div>
         <p>
           Você deseja remover todas as tarefas concluídas?
         </p>
         <div>
-          <p class="botao vermelho" id="deletarConcluidoCancelar">canclar</p>
+          <p class="botao vermelho" id="deletarConcluidoCancelar">cancelar</p>
           <p class="botao azul" id="deletarConcluidoConfirmar">confirmar</p>
         </div>
       </div>
-    </div>
+    </section>
+    <i class="deletarConcluido icon-delete"></i>
     <section>
-      <i class="deletarConcluido icon-delete"></i>
       <div class="digitador">
         <input type="text" id="tarefaConteudo" placeholder="Digite sua tarefa aqui">
       </div>

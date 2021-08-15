@@ -3,27 +3,53 @@
   padding: 0;
 }
 
+:root {
+  --var-cor-azul: #305CC8;
+  --var-cor-azul-escuro: #06304c;
+  --var-cor-vermelho: #da2c38;
+  --var-cor-vermelho-ecuro: #e3170a;
+  --var-cor-azul-principal: #86bbbd;
+}
+
 html {
   font-size: 62.5%;
+  overflow-x: hidden;
 }
 
 body {
+  width: 100vw;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 0.7rem;
+  margin-right: -1rem;
 }
 
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   border-radius: 3rem;
   background: rgba(0, 0, 0, 0.562);
+}
+
+header {
+  width: 100vw;
+  height: 7rem;
+  background: var(--var-cor-azul-principal);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 main {
   margin: auto;
   margin-top: 1rem;
-  width: min-content;
+
+  width: min(80vw, 50rem);
+  position: relative;
 }
 
 section {
@@ -40,11 +66,11 @@ section {
 }
 
 .botao.vermelho {
-  background-color: #E83F5B;
+  background-color: var(--var-cor-vermelho);
 }
 
 .botao.azul {
-  background-color: #3485FF;
+  background-color: var(--var-cor-azul);
 }
 
 /* input ---------------------------- */
@@ -61,7 +87,7 @@ input {
   padding-left: 0.5rem;
 }
 
-/* deletar concluidos */
+/* deletar concluídos */
 i.deletarConcluido {
   position: absolute;
   top: 0.5rem;
@@ -72,7 +98,7 @@ i.deletarConcluido.icon-delete {
   font-size: 2.5rem;
 }
 
-div#deletarConcluidoTela {
+section#deletarConcluidoTela {
   visibility: hidden;
   opacity: 0;
   display: none;
@@ -137,15 +163,14 @@ ul li.tarefa {
   margin-bottom: 2rem;
   padding: 0.5rem 1rem 1rem 1rem;
 
-  width: min(80vw, 50rem);
   height: 5.5em;
 
-  border-bottom: 1px solid red;
+  border-bottom: 2px solid var(--var-cor-vermelho);
   box-shadow: 4px 5px 12px rgba(37, 4, 4, 0.25);
 }
 
 ul li.tarefa.concluido {
-  border-bottom: 1px solid blue;
+  border-bottom: 2px solid var(--var-cor-azul);
 }
 
 
@@ -159,42 +184,43 @@ i.icon-in-alt {
 
 i.icon-edit {
   margin-right: 1rem;
-  color: rgb(4, 4, 99);
+  color: var(--var-cor-azul-escuro);
 }
 
 i.icon-edit:hover {
-  color: rgb(118, 118, 224);
+  color: var(--var-cor-azul);
 }
 
 i.icon-delete:hover {
-  color: red;
+  color: var(--var-cor-vermelho);
 }
 
 /* alerta */
-div.alerta.aparente {
+section.alerta.aparente {
   visibility: visible;
   opacity: 1;
   
-  position: fixed;
-
-  left: 0.1rem;
+  top: 0;
+  left: 0rem;
 }
 
-div.alerta {
+section.alerta {
   transition: 0.1s;
   padding: 1rem;
 
-  background-color: aquamarine;
+  background-color: var(--var-cor-vermelho);
   
   visibility: hidden;
   opacity: 0;
   
   position: fixed;
+  top: 0;
   left: -10rem;
+
   z-index: 10;
 }
 
-div.alerta {
+section.alerta {
   font-size: 1.6rem;
 }
 
