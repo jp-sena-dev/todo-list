@@ -23,9 +23,9 @@ html {
 
 body {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 92vh;
   
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   
   padding-bottom: 5rem;
   position: relative;
@@ -46,7 +46,7 @@ header {
   height: 7rem;
   background: var(--var-cor-azul-principal);
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 2rem;
 
   display: flex;
