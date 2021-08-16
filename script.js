@@ -22,9 +22,19 @@ const mostrandoElementosSalvo = () => {
       let informacoes = localStorage[index];
       criadorTarefa(informacoes);
     } else if (localStorage[`${index}concluido`]) {
-      criadorTarefa(localStorage[`${index}concluido`], 's');
+      criadorTarefa(localStorage[`${index}concluido`], true);
     }
   };
+};
+/* verifica se a tarefa tem a class concluido */
+const concluido = (tarefa) => {
+  let concluido = false;
+  tarefa.classList.forEach((classe) => {
+    if (classe == 'concluido'){
+      concluido = true;
+    }
+  });
+  return concluido;
 };
 
 /* salvando informações no localStorage */
@@ -33,7 +43,7 @@ const salvarInformacao = () => {
   const tarefas = document.querySelectorAll('.tarefa');
   tarefas.forEach((tarefa, index) => {
     const conteudo = tarefa.firstChild;
-    if (tarefa.classList.length > 1) {
+    if (concluido(tarefa)) {
       localStorage.setItem(`${index}concluido`, conteudo.innerHTML);
     } else {
       localStorage.setItem(index, conteudo.innerHTML);
@@ -156,7 +166,7 @@ const opcoesEditar = (tarefa, input) => {
 
 /* Check box (marcar como concluído) */
 const tarefaConcluido = (checkbox, tarefa, concluido) => {
-  if (concluido === 's') {
+  if (concluido) {
     checkbox.checked = true;
     tarefa.classList.add('concluido');
   }
@@ -171,7 +181,7 @@ const tarefaConcluido = (checkbox, tarefa, concluido) => {
 };
 
 /* mostrar tarefa na tela com todos os elementos */
-const criadorTarefa = (conteudo, concluido = 'n') => {
+const criadorTarefa = (conteudo, concluido = false) => {
   const tarefas = document.querySelector('.tarefas');
   const tarefa = document.createElement('li');
   const caixaVerificador = document.createElement('input');

@@ -11,14 +11,24 @@
   --var-cor-azul-principal: #86bbbd;
 }
 
+/* padrão */
 html {
   font-size: 62.5%;
   overflow-x: hidden;
+
+  width: 100vw;
+
+  margin-right: 0.7rem;
 }
 
 body {
   width: 100vw;
+  min-height: 100vh;
+  
   font-family: Arial, Helvetica, sans-serif;
+  
+  padding-bottom: 5rem;
+  position: relative;
 }
 
 body::-webkit-scrollbar {
@@ -49,13 +59,12 @@ main {
   margin-top: 1rem;
 
   width: min(80vw, 50rem);
-  position: relative;
 }
 
 section {
   position: relative;
 }
-
+/* botões =================================================== */
 .botao {
   padding: 1rem;
 
@@ -73,7 +82,7 @@ section {
   background-color: var(--var-cor-azul);
 }
 
-/* input ---------------------------- */
+/* input principal =================================================== */
 div.digitador {
   display: flex;
   justify-content: center;
@@ -87,7 +96,7 @@ input {
   padding-left: 0.5rem;
 }
 
-/* deletar concluídos */
+/* deletar concluídos ===================================================*/
 i.deletarConcluido {
   position: absolute;
   top: 0.5rem;
@@ -150,7 +159,7 @@ section#deletarConcluidoTela {
   justify-content: space-around;
 }
 
-/* tarefa ---------------------------- */
+/* tarefa =================================================== */
 ul li.tarefa {
   display: flex;
   align-items: center;
@@ -195,7 +204,42 @@ i.icon-delete:hover {
   color: var(--var-cor-vermelho);
 }
 
-/* alerta */
+
+/* tarefa conteúdo =================================================== */
+ul.tarefas li.tarefa p {
+  word-break: break-word;
+  margin-right: 0.5rem;
+  
+  font-size: 1.6rem;
+  line-height: 2rem;
+}
+
+/* animação tarefa deletada  ===================================================*/
+ul li.deletado {
+  height: 4rem;
+  width: 0;
+  opacity: 0;
+}
+
+ul li.deletado p {
+  width: min-content;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.marcador {
+  width: 2rem;
+  position: absolute;
+  left: -3rem;
+}
+
+/* input editar =================================================== */
+input.editando {
+  width: 100%;
+  z-index: 2;
+}
+
+/* alerta =================================================== */
 section.alerta.aparente {
   visibility: visible;
   opacity: 1;
@@ -224,36 +268,33 @@ section.alerta {
   font-size: 1.6rem;
 }
 
-/* tarefa conteúdo ---------------------------- */
-ul.tarefas li.tarefa p {
-  word-break: break-word;
-  margin-right: 0.5rem;
+/* footer ============================================================= */
+footer {
+  width: 100vw;
+  height: 4.5rem;
 
-  font-size: 1.6rem;
-  line-height: 2rem;
-}
-
-/* animação tarefa deletada */
-ul li.deletado {
-  height: 4rem;
-  width: 0;
-  opacity: 0;
-}
-
-ul li.deletado p {
-  width: min-content;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.marcador {
-  width: 2rem;
   position: absolute;
-  left: -3rem;
+  bottom: 0rem;
+  
+  background-color: var(--var-cor-azul-principal);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* input editar */
-input.editando {
-  width: 100%;
-  z-index: 2;
+footer p a{
+  text-decoration: none;
+  font-weight: bolder;
+  color: black;
+}
+
+footer p {
+  font-size: 1.6rem;
+  padding: 1rem;
+}
+
+footer i {
+  font-size: 4rem;
+  margin-right: 2rem;
 }
