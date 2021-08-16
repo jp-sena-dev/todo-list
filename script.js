@@ -1,18 +1,24 @@
 /*número de caracteres */
-const quantidadeCaracteres = 147;
+const quantidadeCaracteres = 146;
 
 /* alerta de algo errado */
 const alerta = (erro) => {
   const alerta = document.querySelector('#alerta');
   const texto = document.createElement('p');
+  const quantidadeTexto = document.querySelector('.pAlerta');
+  
+  if (!quantidadeTexto){
+    alerta.classList.add('aparente');
+    texto.innerHTML = erro;
+    alerta.appendChild(texto);
+    texto.classList.add('pAlerta');
+    setTimeout(() => {
+      alerta.classList.remove('aparente');
+      texto.classList.remove('pAlerta');
+      texto.innerHTML = '';
+    }, 2500);
+  }
 
-  alerta.classList.add('aparente');
-  texto.innerHTML = erro;
-  alerta.appendChild(texto);
-  setTimeout(() => {
-    alerta.classList.remove('aparente');
-    texto.innerHTML = '';
-  }, 2500);
 };
 
 /* criando tarefas salvas no localStorage */
