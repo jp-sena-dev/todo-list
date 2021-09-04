@@ -217,7 +217,7 @@ ul.tarefas li.tarefa p {
 /* animação tarefa deletada  ===================================================*/
 ul li.deletado {
   height: 4rem;
-  width: 0;
+  width: 1rem;
   opacity: 0;
 }
 

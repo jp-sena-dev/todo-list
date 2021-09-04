@@ -173,7 +173,7 @@ const opcoesEditarTarefa = (tarefa, input) => {
 };
 
 /* Check box (marcar como concluído) */
-const marcandoTarefaConcluido = (checkbox, tarefa, concluido) => {
+const marcandoTarefaConcluida = (checkbox, tarefa, concluido) => {
   if (concluido) {
     checkbox.checked = true;
     tarefa.classList.add('concluido');
